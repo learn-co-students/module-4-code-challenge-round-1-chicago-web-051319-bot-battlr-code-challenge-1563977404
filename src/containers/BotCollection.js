@@ -16,6 +16,7 @@ class BotCollection extends React.Component {
 				  key={bot.id}
 				  bot={bot}
 				  addBotToArmy={this.props.addBotToArmy}
+				  botShowPage={this.props.botShowPage}
 				/>
 			  })
 			  }

@@ -25,12 +25,17 @@ const BotCard = props => {
     props.removeBotFromArmy ? props.removeBotFromArmy(bot) : props.addBotToArmy(bot)
   }
 
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => addOrRemove(bot)}
+        onClick={() => {
+          // addOrRemove(bot)
+          console.log(props)
+          props.botShowPage(bot)
+        }}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
