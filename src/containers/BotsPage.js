@@ -25,22 +25,6 @@ class BotsPage extends React.Component {
   }
 
   handleClick=(id)=>{
-
-    // const data = this.state.data
-    // const army = this.state.army
-    // const enlisted = data.filter(bot => bot.id == id)[0]
-    // const isEnlistedCheck = army.includes(enlisted)
-    //
-    // if(!isEnlistedCheck){
-    //   this.setState({ army: [...this.state.army, enlisted] })
-    // } else {
-    //   const index = army.indexOf(enlisted)
-    //   army.splice(index, 1)
-    //   this.setState({ army: army })
-    //   // console.log(army)
-    // }
-
-    // return console.log(isEnlistedCheck)
     this.setState({ clicked: !this.state.clicked })
     if (this.state.clicked){
       return comp = <BotCollection
@@ -51,6 +35,22 @@ class BotsPage extends React.Component {
       return comp = <BotSpecs
         bot={bots}/>
     }
+  }
+
+  handleEnlist=(id)=>{
+    const data = this.state.data
+    const army = this.state.army
+    const enlisted = data.filter(bot => bot.id == id)[0]
+    const isEnlistedCheck = army.includes(enlisted)
+
+    if(!isEnlistedCheck){
+      this.setState({ army: [...this.state.army, enlisted] })
+    } else {
+      const index = army.indexOf(enlisted)
+      army.splice(index, 1)
+      this.setState({ army: army })
+    }
+
   }
 
   renderComponent = () => {
@@ -65,12 +65,12 @@ class BotsPage extends React.Component {
         <YourBotArmy
           handleClick={(id)=>this.handleClick(id)}
           army={army}/>
-        // <BotSpecs
-        //   bot={bots}/>
-        // <BotCollection
-        //   handleClick={(id)=>this.handleClick(id)}
-        //   army={army}
-        //   bots={bots}/>
+        <BotSpecs
+          bot={bots}/>
+        <BotCollection
+          handleClick={(id)=>this.handleClick(id)}
+          army={army}
+          bots={bots}/>
         <HandleClick />
         {/* put your components here */}
       </div>
