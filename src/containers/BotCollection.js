@@ -12,7 +12,7 @@ class BotCollection extends React.Component {
     		<div className="row">
     		  {bots.map(bot => {
 				  return <BotCard bot={bot}
-				  recruitBot={this.props.recruitBot}
+				  showBot={this.props.showBot}
 				  />
 			  })}
     		</div>
