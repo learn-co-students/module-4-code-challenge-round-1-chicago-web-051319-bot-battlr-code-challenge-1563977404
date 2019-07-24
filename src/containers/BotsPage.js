@@ -8,7 +8,8 @@ class BotsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      bots: []
+      bots: [],
+      army: []
      }
   }
 
@@ -20,11 +21,22 @@ class BotsPage extends React.Component {
     }))
   }
 
+  recruitBot = (id) => {
+    const bots = this.state.bots
+    const bot = bots.find(bot => bot.id == id)
+    const prevBots = this.state.army
+    this.setState({
+      army: [...prevBots, bot]
+    })
+  }
+
   render() {
     return (
       <div>
-        <YourBotArmy/>
-        <BotCollection bots={this.state.bots}/>
+        <YourBotArmy bots={this.state.army}/>
+        <BotCollection bots={this.state.bots}
+        recruitBot={(id) => this.recruitBot(id)}
+        />
       </div>
     );
   }
