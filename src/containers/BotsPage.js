@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 
 class BotsPage extends React.Component {
@@ -9,7 +10,8 @@ class BotsPage extends React.Component {
     super(props)
     this.state = {
       data: [],
-      army: []
+      army: [],
+      clicked: false
     }
   }
 
@@ -24,20 +26,35 @@ class BotsPage extends React.Component {
 
   handleClick=(id)=>{
 
-    const data = this.state.data
-    const army = this.state.army
-    const enlisted = data.filter(bot => bot.id == id)[0]
-    const isEnlistedCheck = army.includes(enlisted)
+    // const data = this.state.data
+    // const army = this.state.army
+    // const enlisted = data.filter(bot => bot.id == id)[0]
+    // const isEnlistedCheck = army.includes(enlisted)
+    //
+    // if(!isEnlistedCheck){
+    //   this.setState({ army: [...this.state.army, enlisted] })
+    // } else {
+    //   const index = army.indexOf(enlisted)
+    //   army.splice(index, 1)
+    //   this.setState({ army: army })
+    //   // console.log(army)
+    // }
 
-    if(!isEnlistedCheck){
-      this.setState({ army: [...this.state.army, enlisted] })
-    } else {
-      const index = army.indexOf(enlisted)
-      army.splice(index, 1)
-      this.setState({ army: army })
-      // console.log(army)
-    }
     // return console.log(isEnlistedCheck)
+    this.setState({ clicked: !this.state.clicked })
+    if (this.state.clicked){
+      return comp = <BotCollection
+        handleClick={(id)=>this.handleClick(id)}
+        army={army}
+        bots={bots}/>
+    } else {
+      return comp = <BotSpecs
+        bot={bots}/>
+    }
+  }
+
+  renderComponent = () => {
+
   }
 
   render() {
@@ -48,9 +65,13 @@ class BotsPage extends React.Component {
         <YourBotArmy
           handleClick={(id)=>this.handleClick(id)}
           army={army}/>
-        <BotCollection
-          handleClick={(id)=>this.handleClick(id)}
-          bots={bots}/>
+        // <BotSpecs
+        //   bot={bots}/>
+        // <BotCollection
+        //   handleClick={(id)=>this.handleClick(id)}
+        //   army={army}
+        //   bots={bots}/>
+        <HandleClick />
         {/* put your components here */}
       </div>
     );
