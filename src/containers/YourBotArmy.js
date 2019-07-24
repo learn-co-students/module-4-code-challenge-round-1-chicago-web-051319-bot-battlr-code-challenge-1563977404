@@ -4,13 +4,6 @@ import BotCard from "../components/BotCard";
 class YourBotArmy extends React.Component {
   //your bot army code here...
 
-handleSecondCardClick = (bot) => {
-   let newBot = this.state.myBots
-   newBot.push(bot)
-   this.setState({
-     myBots: newBot
-   })
-  }
 
   render(){
     return (
@@ -18,7 +11,7 @@ handleSecondCardClick = (bot) => {
         <div className="ui five column grid">
           <div className="row bot-army-row">
           {this.props.myBots.map(bot => {
-          return <BotCard bot={bot}/>})
+          return <BotCard bot={bot} handleCardClick={this.props.handleCardClick} /> })
           }
             Your Bot Army
           </div>

@@ -20,21 +20,28 @@ componentDidMount(){
   }))
 }
 
-// { this.state.myBots.find((bot) => {return bot === bot}) ?
-// null :
+handleCardClick = (sbot) => {
 
-  handleCardClick = (bot) => {
-   let newBot = this.state.myBots
-   newBot.push(bot)
-   this.setState({
-     myBots: newBot
-   })
-  }
+    let newBot = this.state.myBots
+    if(this.state.myBots.find((bot) => {return bot == sbot})) {
+      const bots = newBot.filter(bot => bot != sbot)
+      this.setState({
+       myBots: bots
+     })
+    } else {
+      newBot.push(sbot)
+      this.setState({
+       myBots: newBot
+     })
+    }
+}
+
+
 
   render() {
     return (
       <div>
-        <YourBotArmy bots={this.state.bots} myBots = {this.state.myBots} />
+        <YourBotArmy bots={this.state.bots} handleCardClick={this.handleCardClick} myBots = {this.state.myBots} />
         <BotsCollection bots={this.state.bots} handleCardClick={this.handleCardClick}/>
       </div>
     );
