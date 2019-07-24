@@ -32,8 +32,11 @@ class BotsPage extends React.Component {
 
   addToArmy = (bot) => {
     const newArmy = this.state.yourArmy
+    const currentList = this.state.botsArr
     newArmy.push(bot)
+    currentList.pop(bot)
     this.setState({
+      botsArr: currentList,
       yourArmy: newArmy,
       showBot: false
     })
