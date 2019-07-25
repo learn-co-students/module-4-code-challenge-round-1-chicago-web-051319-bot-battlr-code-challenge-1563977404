@@ -8,6 +8,7 @@ class BotCollection extends React.Component {
       return < BotCard
       bot={bot} key={bot.id}
       receiveBotInfo={this.props.receiveBotInfo}
+      showBotSpec={this.props.showBotSpec}
       />
     })
   }

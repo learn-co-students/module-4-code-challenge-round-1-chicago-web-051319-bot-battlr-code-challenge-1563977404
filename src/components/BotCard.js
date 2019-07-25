@@ -5,6 +5,7 @@ const BotCard = props => {
 
   const handleBotInfo = (bot) => {
     props.receiveBotInfo(bot)
+    // props.showBotSpec(bot)
   }
 
   let botType;

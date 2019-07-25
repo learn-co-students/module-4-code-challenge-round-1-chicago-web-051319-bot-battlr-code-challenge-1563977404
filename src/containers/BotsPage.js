@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 const API = 'https://bot-battler-api.herokuapp.com/api/v1/bots';
 
 class BotsPage extends React.Component {
@@ -11,6 +12,10 @@ class BotsPage extends React.Component {
       myBots: []
     }
   }
+
+  // Add State for refactor
+  // Clicked Bot for showing detail page
+  // and toggle return part to display spec instead of collection
 
   componentDidMount = () => {
     fetch(API)
@@ -34,6 +39,15 @@ class BotsPage extends React.Component {
     })
   }
 
+  // Refactor
+
+  showBotSpec = (bot) => {
+    return < BotSpecs bot={bot} />
+  }
+
+  // ShowBotSpec need to set state bot info which handed from BotCard
+  // and toggle showing or not with true or false
+
   render() {
     return (
       <div>
@@ -44,6 +58,7 @@ class BotsPage extends React.Component {
         {< BotCollection
           bots={this.state.bots}
           receiveBotInfo={this.receiveBotInfo}
+          showBotSpec={this.showBotSpec}
           />}
       </div>
     );
