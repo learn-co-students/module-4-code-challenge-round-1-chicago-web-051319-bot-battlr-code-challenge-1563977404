@@ -9,6 +9,8 @@ class BotCollection extends React.Component {
       bot={bot} key={bot.id}
       receiveBotInfo={this.props.receiveBotInfo}
       showBotSpec={this.props.showBotSpec}
+      findBot={this.props.findBot}
+      removeMyBot={this.props.removeMyBot}
       />
     })
   }

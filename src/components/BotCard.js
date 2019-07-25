@@ -1,11 +1,20 @@
 import React from "react";
+let toggle = true;
+
 
 const BotCard = props => {
   const { bot } = props;
 
+
   const handleBotInfo = (bot) => {
-    props.receiveBotInfo(bot)
-    // props.showBotSpec(bot)
+    // if (toggle === true){
+      props.showBotSpec(bot)
+      props.findBot(bot)
+      // toggle = false;
+    // } else if(toggle === false){
+    //   props.removeMyBot(bot)
+    //   toggle = true;
+    // }
   }
 
   let botType;

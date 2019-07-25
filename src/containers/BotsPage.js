@@ -9,13 +9,11 @@ class BotsPage extends React.Component {
     super(props);
     this.state = {
       bots: [],
-      myBots: []
+      myBots: [],
+      showSpec: false,
+      displayBot: []
     }
   }
-
-  // Add State for refactor
-  // Clicked Bot for showing detail page
-  // and toggle return part to display spec instead of collection
 
   componentDidMount = () => {
     fetch(API)
@@ -42,7 +40,22 @@ class BotsPage extends React.Component {
   // Refactor
 
   showBotSpec = (bot) => {
-    return < BotSpecs bot={bot} />
+    this.setState({
+      showSpec: !this.state.showSpec
+    })
+  }
+
+  findBot = (bot) => {
+    this.setState({
+      displayBot: this.state.displayBot.concat(bot)
+    })
+  }
+
+  handleBack = () => {
+    this.setState({
+      displayBot: [],
+      showSpec: !this.state.showSpec
+    })
   }
 
   // ShowBotSpec need to set state bot info which handed from BotCard
@@ -54,11 +67,20 @@ class BotsPage extends React.Component {
       {< YourBotArmy
         myBots={this.state.myBots}
         receiveBotInfo={this.receiveBotInfo}
+        removeMyBot={this.removeMyBot}
         />}
-        {< BotCollection
+        { this.state.showSpec ? < BotSpecs
+          bot={this.state.displayBot[0]}
+          receiveBotInfo={this.receiveBotInfo}
+          handleBack={this.handleBack}
+          />
+          :
+          < BotCollection
           bots={this.state.bots}
           receiveBotInfo={this.receiveBotInfo}
           showBotSpec={this.showBotSpec}
+          findBot={this.findBot}
+          removeMyBot={this.removeMyBot}
           />}
       </div>
     );
