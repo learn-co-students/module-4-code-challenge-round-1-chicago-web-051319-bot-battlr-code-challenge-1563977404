@@ -1,23 +1,50 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+const API = 'https://bot-battler-api.herokuapp.com/api/v1/bots';
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
-  renderArmy = () => {
-    return this.props.armies.map((army) => {
-      return < BotCollection
-      bot={army} key={army.id}
-      botInfo={this.props.botInfo}
-      />
+  constructor(props){
+    super(props);
+    this.state = {
+      bots: [],
+      myBots: []
+    }
+  }
+
+  componentDidMount = () => {
+    fetch(API)
+    .then(r => r.json())
+    .then(bots => this.setState({
+      bots: bots
+    }))
+  }
+
+  removeMyBot = (bot) => {
+    const filtered = this.state.myBots.filter(mybot => mybot !== bot);
+    this.setState({
+      myBots: filtered
+    })
+  }
+
+  receiveBotInfo = (bot) => {
+    this.state.myBots.find(mybot => mybot.id === bot.id) ? this.removeMyBot(bot) :
+    this.setState({
+      myBots: this.state.myBots.concat(bot)
     })
   }
 
   render() {
     return (
       <div>
-        < YourBotArmy clickedArmy={this.props.clickedArmy} />
-        {this.renderArmy()}
+      {< YourBotArmy
+        myBots={this.state.myBots}
+        receiveBotInfo={this.receiveBotInfo}
+        />}
+        {< BotCollection
+          bots={this.state.bots}
+          receiveBotInfo={this.receiveBotInfo}
+          />}
       </div>
     );
   }

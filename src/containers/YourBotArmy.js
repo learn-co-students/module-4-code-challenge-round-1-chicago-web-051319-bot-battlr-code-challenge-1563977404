@@ -2,21 +2,23 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
-  //your bot army code here...
-  render(){
-    const renderClickedArmy = () => {
-        return this.props.clickedArmy.map(army => {
-          console.log(army)
-          return < BotCard bot={army} key={army.id} />
-        })
-      }
 
+  renderMyBots = () => {
+    return this.props.myBots.map(myBot => {
+      return < BotCard
+      bot={myBot} key={myBot.id}
+      receiveBotInfo={this.props.receiveBotInfo}
+      />
+    })
+  }
+
+  render(){
     return (
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
           <div className="row bot-army-row">
-            Your Bot Army
-            {renderClickedArmy()}
+          Your Bot Army
+            {this.renderMyBots()}
           </div>
         </div>
       </div>
